@@ -1,1 +1,34 @@
 @import "~bootstrap/scss/bootstrap";
+
+$yellowML: #FFE600;
+$negro: #333333;
+$negro1: #666666;
+$negro2: #999999;
+$negro3: #EEEEEE;
+$button: #3483FA;
+
+html, body{
+    height:100%;
+    width: 100%;
+    margin:0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search {
+    background-color: $negro3;
+    padding-top: 16px;
+    height:100%;
+    width: 100%;
+}
+
+.searchRow {
+    background-color: $yellowML;
+    padding-top: 16px;
+    width: 100vw;
+}
+
+.right {
+    text-align: right;
+}
+
