@@ -12,7 +12,7 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={home} />
+        <Route exact path="/" component={Search} />
         <Route exact path="/api/items/:id" component={Api} />
         <Route exact path="/items" component={Search}/>
         <Route exact path="/items/:id" component={home2} />
