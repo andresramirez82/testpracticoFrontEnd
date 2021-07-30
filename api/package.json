@@ -14,6 +14,7 @@
     "dotenv": "^10.0.0",
     "express-useragent": "^1.0.15",
     "helmet": "^4.6.0",
+    "nodemon": "^2.0.12",
     "useragent": "^2.3.0"
   }
 }

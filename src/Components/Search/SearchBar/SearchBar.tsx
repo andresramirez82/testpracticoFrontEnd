@@ -9,7 +9,7 @@ export default function Search(): JSX.Element {
     <div className="container-fluid">
       <div className="row searchRow">
         <div className="col"></div>
-        <div className="col right"><img src="logo_ML.png"></img></div>
+        <div className="col right"><img src="logo_ML.png" alt='Logo MeLi'></img></div>
         <div className="col-9"><InputGroup className="mb-3 right">
             <FormControl
               placeholder="Nunca dejes de buscar"
@@ -17,7 +17,7 @@ export default function Search(): JSX.Element {
               aria-describedby="Search"
             />
             <InputGroup.Text id="basic-addon2">
-              <img src="ic_Search.png"></img>
+              <img src="ic_Search.png" alt='Search Icon'></img>
             </InputGroup.Text>
           </InputGroup></div>
         <div className="col"></div>

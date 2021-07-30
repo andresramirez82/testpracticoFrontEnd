@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Api from "Components/Api/api";
 import Search from "Components/Search/Search";
+import Auth from "Components/Auth/Auth";
 
 const home = () => {
   return <p>Hola mundo</p>;
@@ -13,6 +14,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Search} />
+        <Route exact path="/auth" component={Auth}/>
         <Route exact path="/api/items/:id" component={Api} />
         <Route exact path="/items" component={Search}/>
         <Route exact path="/items/:id" component={home2} />

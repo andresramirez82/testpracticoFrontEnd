@@ -12,10 +12,10 @@ const Token = () => {
     params.append('grant_type', 'authorization_code');
     params.append('client_id', '1455898828251959');
     params.append('client_secret', '1PnYgijqC7dtBiWLaWhnifpYGEwJVaUz');
-    params.append('code', 'TG-61041f62a257fc0007f5ae6f-7022064');
-    params.append('redirect_uri', 'https://mercadolibre.com.ar');
+    params.append('code', 'TG-6104554d27e4a40008a32992-7022064');
+    params.append('redirect_uri', 'http://localhost:5200/api/auth');
 
-    axios.post('https://api.mercadolibre.com/oauth/token', params )
+    axios.post('https://api.mercadolibre.com/auth/token', params )
     .then(function (response){
         console.log('access_token: ',response.data.access_token);
         localStorage.set('access_token',response.data.access_token);
@@ -42,16 +42,6 @@ const Refresh = () => {
     })
 }
 
-router.get('/auth', middlewareAgent, function (req, res, next) {
-    axios.get('https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=1455898828251959&redirect_uri=http://localhost:5200/api/auth')
-    .then(function (response){
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-});
-
 router.get('/', middlewareAgent, function (req, res, next) {
     let endpoints = [];
     router.stack.forEach(dato => {
@@ -62,12 +52,14 @@ router.get('/', middlewareAgent, function (req, res, next) {
         Mensaje: 'Api TestFrontEnd',
         endpoints
     };
-    res.send(respuesta);
     Token();
+    res.send(respuesta);
 });
 
 router.get('/api/auth', middlewareAgent, function (req, res, next) {
-    console.log(req.query.code)
+    console.log('AuthCode',req.query.code);
+    //Token(req.query.code);
+    res.send("logueado");
 });
 
 router.get('/api/items', middlewareAgent, function (req, res) {
