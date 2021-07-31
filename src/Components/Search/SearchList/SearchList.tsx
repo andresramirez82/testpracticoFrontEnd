@@ -1,9 +1,10 @@
-import "Styles/App.scss";
 
-export default function SearchList(): JSX.Element {
+export default function SearchList(props: any): JSX.Element {
+ const text = props.match.params.text;
+ //console.log(props);
   return (
     <div className="search">
-      <label>Search list</label>
+      <label>Search list    {text}  </label>
     </div>
   );
 }

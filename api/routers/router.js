@@ -7,24 +7,6 @@ const axios = require('axios');
 var middlewares = require('../Middleware/middleware');
 var middlewareAgent = middlewares.middlewareAgent;
 
-const Token = () => {
-    const params = new URLSearchParams();
-    params.append('grant_type', 'authorization_code');
-    params.append('client_id', '1455898828251959');
-    params.append('client_secret', '1PnYgijqC7dtBiWLaWhnifpYGEwJVaUz');
-    params.append('code', 'TG-6104554d27e4a40008a32992-7022064');
-    params.append('redirect_uri', 'http://localhost:5200/api/auth');
-
-    axios.post('https://api.mercadolibre.com/auth/token', params )
-    .then(function (response){
-        console.log('access_token: ',response.data.access_token);
-        localStorage.set('access_token',response.data.access_token);
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-}
-
 const Refresh = () => {
     const params = new URLSearchParams();
     params.append('grant_type', 'refresh_token');
@@ -52,14 +34,27 @@ router.get('/', middlewareAgent, function (req, res, next) {
         Mensaje: 'Api TestFrontEnd',
         endpoints
     };
-    Token();
     res.send(respuesta);
 });
 
 router.get('/api/auth', middlewareAgent, function (req, res, next) {
-    console.log('AuthCode',req.query.code);
-    //Token(req.query.code);
-    res.send("logueado");
+    let code = req.query.code;
+    
+    const params = new URLSearchParams();
+    params.append('grant_type', 'authorization_code');
+    params.append('client_id', '1455898828251959');
+    params.append('client_secret', '1PnYgijqC7dtBiWLaWhnifpYGEwJVaUz');
+    params.append('code', code);
+    params.append('redirect_uri', 'http://localhost:3000/auth');
+    //console.log(params);
+    axios.post('https://api.mercadolibre.com/oauth/token', params )
+    .then(function (response){
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(response.data.access_token))
+    })
+    .catch(function (error) {
+        console.log(error);
+    })
 });
 
 router.get('/api/items', middlewareAgent, function (req, res) {

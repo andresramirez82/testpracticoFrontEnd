@@ -1,9 +1,8 @@
 import SearchBar from "Components/Search/SearchBar/SearchBar";
 import SearchList from "Components/Search/SearchList/SearchList";
 
-import "Styles/App.scss";
 
-export default function Search(): JSX.Element {
+export default function Search(props: any): JSX.Element {
   return (
     <>
       <SearchBar />

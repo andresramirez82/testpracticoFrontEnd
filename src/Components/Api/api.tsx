@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "Helper/Axios";
 
-type data = {
-  title: string;
-}
 export default function App(props: any) {
   const id = props.match.params.id;
   const [datos, setdatos] = useState([]);
