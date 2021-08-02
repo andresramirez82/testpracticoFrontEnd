@@ -6,8 +6,12 @@ import Col from "react-bootstrap/Col";
 import "Styles/App.scss";
 import { useHistory } from "react-router-dom";
 
-export default function Search(): JSX.Element {
-  const [text, settext] = useState("");
+type SerachBarProps = {
+    text?: string;
+}
+
+export default function Search(props: SerachBarProps): JSX.Element {
+  const [text, settext] = useState(props.text);
   const history = useHistory();
 
   return (
@@ -15,7 +19,7 @@ export default function Search(): JSX.Element {
       <div className="row searchRow">
         <div className="col"></div>
         <div className="col right">
-          <img src="logo_ML.png" alt="Logo MeLi"></img>
+          <img src="/logo_ML.png" alt="Logo MeLi"></img>
         </div>
         <div className="col-9">
           <InputGroup className="mb-3 right">
@@ -24,12 +28,14 @@ export default function Search(): JSX.Element {
               aria-label="Search"
               aria-describedby="Search"
               onChange={(event) => settext(event.target.value)}
+              value={text}
             />
             <InputGroup.Text id="basic-addon2">
               <img
                 onClick={() => history.push("/items/" + text)}
-                src="ic_Search.png"
+                src="/ic_Search.png"
                 alt="Search Icon"
+                
               ></img>
             </InputGroup.Text>
           </InputGroup>

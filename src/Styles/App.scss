@@ -32,3 +32,40 @@ html, body{
     text-align: right;
 }
 
+.separator {
+    --bs-breadcrumb-divider: '>';
+}
+
+.white {
+    background-color: white;
+}
+
+.breadcrumb {
+    font-size: 14;
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+}
+.img-thumbnail  {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.left{
+    text-align: left;
+}
+
+.price {
+    padding-top: 32px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.title {
+    padding-top: 32px;
+    font-weight: bold;
+    font-size: 18px;
+
+}
