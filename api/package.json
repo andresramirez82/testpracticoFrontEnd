@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
+    "encodeurl": "^1.0.2",
     "express-useragent": "^1.0.15",
     "helmet": "^4.6.0",
     "nodemon": "^2.0.12",

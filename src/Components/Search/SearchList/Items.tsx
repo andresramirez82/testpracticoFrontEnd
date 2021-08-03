@@ -12,10 +12,26 @@ export default function Items(props: any): JSX.Element {
           />
         </div>
         <div className="col-6">
-          <div className="row price">$ {props.price}</div>
-          <div className="row title">{props.title}</div>
+          <div className="row">
+            <div className="col-6 price">
+              $ {props.price}
+              {props.shipping.free_shipping && (
+                <img
+                  className="shipping"
+                  src="/ic_shipping.png"
+                  alt="Free Shipping"
+                />
+              )}
+            </div>
+            <div className="col-2 left"></div>
+          </div>
+          <div className="row">
+            <div className="col-6 title">
+              <a href={'/items/id/' + props.id} >{props.title}</a>
+              </div>
+          </div>
         </div>
-        <div className="col-2">
+        <div className="col-2 city">
           <div className="row"> {props.address.state_name}</div>
         </div>
       </div>

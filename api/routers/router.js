@@ -75,12 +75,12 @@ router.get('/api/items', middlewareAgent, function (req, res) {
             for (const Prod in response.data.results) {
 
                 const ID = response.data.results[Prod]['seller']['id'];
-                const dato = await axios.get(`https://api.mercadolibre.com/users/me`, config);
+                const dato = await axios.get(`https://api.mercadolibre.com/users/${ID}`, config);
                 console.log(dato.data.first_name);
                 Author.push(
                     {
-                        "name": dato.data.first_name,
-                        "lastname": dato.data.last_name
+                        "name": 'dato.data.first_name',
+                        "lastname": 'dato.data.last_name'
                     }
                 )
                 Items.push(response.data.results[Prod]);

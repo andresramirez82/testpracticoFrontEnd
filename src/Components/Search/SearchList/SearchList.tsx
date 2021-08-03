@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import SearchBar from "Components/Search/SearchBar/SearchBar";
 import Api, { config } from "Helper/Axios";
 import Items from "Components/Search/SearchList/Items";
+import Spinner from "Components/Spinner/Spinner";
+
 // import { dataContext } from "Helper/Store";
 
 export default function SearchList(props: any): JSX.Element {
@@ -9,11 +11,14 @@ export default function SearchList(props: any): JSX.Element {
   //const { data, setdata } = useContext(dataContext);
   const [searchdate, setsearchdate] = useState([]);
   const [category, setcategory] = useState([]);
+  const [loading, setloading] = useState(false);
+
   useEffect(() => {
+    setloading(true);
     Api.get("/api/items?q=" + text, config).then((res) => {
-      //setdata(res.data);
       setsearchdate(res.data[0].Items);
       setcategory(res.data[0].Category);
+      setloading(false);
       console.log(res.data[0].Items);
     });
   }, [text]);
@@ -24,28 +29,42 @@ export default function SearchList(props: any): JSX.Element {
   return (
     <>
       <SearchBar text={text} />
-      <div className="search">
-        
-        <div className="container">
-        <nav className="separator" aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            {category.map(({ id, name }, index) => (
-              <li
-                className="breadcrumb-item active"
-                aria-current="page"
-                key={id}
-              >
-                {lastitem(index, name)}
-              </li>
-            ))}
-          </ol>
-        </nav>
+      {loading && <Spinner />}
+      {!loading && (
+        <div className="search">
+          <div className="container-fluid">
+            <div className="row">
+              <nav className="separator" aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                  {category.map(({ id, name }, index) => (
+                    <li
+                      className="breadcrumb-item active"
+                      aria-current="page"
+                      key={id}
+                    >
+                      {lastitem(index, name)}
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </div>
 
-          {searchdate.map(({ title, id, thumbnail, price, address}) => (
-            <Items key={id} title={title} thumbnail={thumbnail} price={price} address={address} />
-          ))}
+            {searchdate.map(
+              ({ title, id, thumbnail, price, address, shipping }) => (
+                <Items
+                  key={id}
+                  id={id}
+                  title={title}
+                  thumbnail={thumbnail}
+                  price={price}
+                  address={address}
+                  shipping={shipping}
+                />
+              )
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

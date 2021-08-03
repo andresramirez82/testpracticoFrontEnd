@@ -1,19 +1,31 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "Styles/App.scss";
 import { useHistory } from "react-router-dom";
+import { dataContext } from "Helper/Store";
+var encodeUrl = require('encodeurl');
+
 
 type SerachBarProps = {
-    text?: string;
-}
+  text?: string;
+};
 
 export default function Search(props: SerachBarProps): JSX.Element {
   const [text, settext] = useState(props.text);
   const history = useHistory();
+  const { setSearchText } = useContext(dataContext);
 
+  const Enter = (event: any) => {
+    if (event.key === 'Enter') {
+      clickSearch();
+    }
+  };
+
+  const clickSearch = () => {
+    history.push("/items/" + encodeUrl(text));
+    setSearchText(text);
+  }
   return (
     <div className="container-fluid">
       <div className="row searchRow">
@@ -29,14 +41,10 @@ export default function Search(props: SerachBarProps): JSX.Element {
               aria-describedby="Search"
               onChange={(event) => settext(event.target.value)}
               value={text}
+              onKeyPress={Enter}
             />
-            <InputGroup.Text id="basic-addon2">
-              <img
-                onClick={() => history.push("/items/" + text)}
-                src="/ic_Search.png"
-                alt="Search Icon"
-                
-              ></img>
+            <InputGroup.Text id="basic-addon2" onClick={clickSearch}>
+              <img src="/ic_Search.png" alt="Search Icon"></img>
             </InputGroup.Text>
           </InputGroup>
         </div>
