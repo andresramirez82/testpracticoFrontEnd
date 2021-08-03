@@ -39,7 +39,7 @@ export default function ItemDetail(props: any): JSX.Element {
           <div className="row">
             <div className="col-1"></div>
             <div className="col-7 thumbnaildetail">
-              <img src={product?.thumbnail} height={680} alt={product?.title} />{" "}
+              <img src={product?.thumbnail} height={680} width={680} alt={product?.title} />{" "}
             </div>
             <div className="col-3">
               <div className="row sold_quantity">

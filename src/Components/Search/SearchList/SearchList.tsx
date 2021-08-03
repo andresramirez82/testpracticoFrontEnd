@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from "react";
 import SearchBar from "Components/Search/SearchBar/SearchBar";
 import Category from "Components/Search/SearchList/Category";
 import Api, { config } from "Helper/Axios";
@@ -6,9 +7,6 @@ import Items from "Components/Search/SearchList/Items";
 import Spinner from "Components/Spinner/Spinner";
 import { CategoryInterface } from "Models/Models";
 import { useHistory } from "react-router-dom";
-
-
-
 
 export default function SearchList(props: any): JSX.Element {
   const text = props.match.params.text;
@@ -20,15 +18,17 @@ export default function SearchList(props: any): JSX.Element {
 
   useEffect(() => {
     setloading(true);
-    Api.get("/api/items?q=" + text, config).then((res) => {
-      setsearchdate(res.data[0].Items);
-      setcategory(res.data[0].Category);
-      setloading(false);
-      // console.log(res.data[0].Items);
-    }).catch((err) => {
-      localStorage.clear();
-      history.push('/');
-  });;
+    Api.get("/api/items?q=" + text, config)
+      .then((res) => {
+        setsearchdate(res.data[0].Items);
+        setcategory(res.data[0].Category);
+        setloading(false);
+        // console.log(res.data[0].Items);
+      })
+      .catch((err) => {
+        localStorage.clear();
+        history.push("/");
+      });
   }, [text]);
 
   return (

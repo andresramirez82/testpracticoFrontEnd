@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Api from "Components/Api/api";
 import Search from "Components/Search/Search";
 import Auth from "Components/Auth/Auth";
 import Token from "Components/Auth/Token";
@@ -15,7 +14,6 @@ export default function Routes() {
           <Search />
         </Route>
         <Route exact path="/auth" component={Token} />
-        <Route exact path="/api/items/:id" component={Api} />
         <Route exact path="/items/id/:id" component={ItemDetail} />
         <Route exact path="/items/:text" component={SearchList} />
       </Switch>

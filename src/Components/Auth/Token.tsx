@@ -8,7 +8,7 @@ export default function Token(props: any) {
     let code = "";
     code = new URLSearchParams(props.location.search).get("code") || "";
     //code = code?.toString();
-    const token = localStorage.setItem("Code", code);
+    localStorage.setItem("Code", code);
 
     Api.get("/api/auth?code=" + code)
       .then((response, ...other) => {

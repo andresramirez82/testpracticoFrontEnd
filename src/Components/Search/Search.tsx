@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import SearchBar from "Components/Search/SearchBar/SearchBar";
 
 

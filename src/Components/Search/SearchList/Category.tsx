@@ -3,6 +3,7 @@ import { Categoryprops } from "Models/Models";
 
 
 export default function Cateegory(props: Categoryprops): JSX.Element {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [category, setcategory] = useState(props.category);
 
     const lastitem = (id: number, name: string) => {

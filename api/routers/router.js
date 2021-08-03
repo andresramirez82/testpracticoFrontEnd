@@ -6,7 +6,7 @@ const axios = require('axios');
 // Middlewares
 var middlewares = require('../Middleware/middleware');
 var middlewareAgent = middlewares.middlewareAgent;
-
+/*
 const Refresh = () => {
     const params = new URLSearchParams();
     params.append('grant_type', 'refresh_token');
@@ -23,7 +23,7 @@ const Refresh = () => {
             console.log(error);
         })
 }
-
+*/
 router.get('/', middlewareAgent, function (req, res, next) {
     let endpoints = [];
     router.stack.forEach(dato => {
@@ -75,12 +75,13 @@ router.get('/api/items', middlewareAgent, function (req, res) {
             for (const Prod in response.data.results) {
 
                 const ID = response.data.results[Prod]['seller']['id'];
-                const dato = await axios.get(`https://api.mercadolibre.com/users/${ID}`, config);
+                console.log(ID);
+                //const dato = await axios.get(`https://api.mercadolibre.com/users/${ID}`, config);
                 
                 Author.push(
                     {
-                        "name": dato.data?.first_name,
-                        "lastname": dato.data?.last_name
+                        "name": 'dato.data?.first_name',
+                        "lastname": 'dato.data?.last_name'
                     }
                 )
                 Items.push(response.data.results[Prod]);
@@ -124,7 +125,7 @@ router.get('/api/items/:id', middlewareAgent, function (req, res) {
             const category = await axios.get(` https://api.mercadolibre.com/categories/${response.data.category_id}`, config);
             const detail = await axios.get(` https://api.mercadolibre.com/items/${id}/description`, config);
 
-            response.data.condition == 'used' ? response.data.condition = 'Usado' : response.data.condition = 'Nuevo';
+            response.data.condition === 'used' ? response.data.condition = 'Usado' : response.data.condition = 'Nuevo';
             const Data = {
                 title: response.data.title,
                 category: category.data.path_from_root,
