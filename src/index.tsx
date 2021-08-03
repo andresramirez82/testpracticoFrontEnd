@@ -4,13 +4,10 @@ import "Styles/index.scss";
 import "Styles/App.scss";
 import App from "App";
 import reportWebVitals from "reportWebVitals";
-import { DataProvider } from "Helper/Store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <DataProvider>
-      <App />
-    </DataProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

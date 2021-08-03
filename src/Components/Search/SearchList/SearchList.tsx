@@ -5,18 +5,18 @@ import Api, { config } from "Helper/Axios";
 import Items from "Components/Search/SearchList/Items";
 import Spinner from "Components/Spinner/Spinner";
 import { CategoryInterface } from "Models/Models";
+import { useHistory } from "react-router-dom";
 
-// import { dataContext } from "Helper/Store";
 
 
 
 export default function SearchList(props: any): JSX.Element {
   const text = props.match.params.text;
-  //const { data, setdata } = useContext(dataContext);
 
   const [searchdate, setsearchdate] = useState([]);
   const [category, setcategory] = useState<CategoryInterface[]>();
   const [loading, setloading] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     setloading(true);
@@ -25,7 +25,10 @@ export default function SearchList(props: any): JSX.Element {
       setcategory(res.data[0].Category);
       setloading(false);
       // console.log(res.data[0].Items);
-    });
+    }).catch((err) => {
+      localStorage.clear();
+      history.push('/');
+  });;
   }, [text]);
 
   return (
@@ -46,6 +49,7 @@ export default function SearchList(props: any): JSX.Element {
                   price={price}
                   address={address}
                   shipping={shipping}
+                  text={text}
                 />
               )
             )}

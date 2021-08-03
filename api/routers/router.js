@@ -76,11 +76,11 @@ router.get('/api/items', middlewareAgent, function (req, res) {
 
                 const ID = response.data.results[Prod]['seller']['id'];
                 const dato = await axios.get(`https://api.mercadolibre.com/users/${ID}`, config);
-                console.log(dato.data.first_name);
+                
                 Author.push(
                     {
-                        "name": 'dato.data.first_name',
-                        "lastname": 'dato.data.last_name'
+                        "name": dato.data?.first_name,
+                        "lastname": dato.data?.last_name
                     }
                 )
                 Items.push(response.data.results[Prod]);
@@ -101,11 +101,11 @@ router.get('/api/items', middlewareAgent, function (req, res) {
             //console.log(response.data.results);
             res.send(JSON.stringify(ReturnArray));
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch((err) => {
+            res.status(300);
+            res.send(err);
         })
-        .then(function () {
-        });
+
 });
 
 router.get('/api/items/:id', middlewareAgent, function (req, res) {
@@ -135,6 +135,9 @@ router.get('/api/items/:id', middlewareAgent, function (req, res) {
                 sold_quantity: response.data.sold_quantity
             }
             res.send(Data);
+        }).catch((err) => {
+            res.status(300);
+            res.send(err);
         });
 });
 

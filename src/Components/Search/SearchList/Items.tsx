@@ -34,7 +34,7 @@ export default function Items(props: any): JSX.Element {
           </div>
           <div className="row">
             <div className="col-6 title">
-              <a href={"/items/id/" + props.id} className="link">
+              <a href={"/items/id/" + props.id + '?q='+props.text } className="link">
                 {props.title}
               </a>
             </div>

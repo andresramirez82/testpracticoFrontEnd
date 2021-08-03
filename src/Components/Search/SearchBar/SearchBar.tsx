@@ -3,7 +3,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import "Styles/App.scss";
 import { useHistory } from "react-router-dom";
-import { dataContext } from "Helper/Store";
 import { SerachBarProps } from "Models/Models";
 var encodeUrl = require('encodeurl');
 
@@ -13,7 +12,6 @@ var encodeUrl = require('encodeurl');
 export default function Search(props: SerachBarProps): JSX.Element {
   const [text, settext] = useState(props.text);
   const history = useHistory();
-  const { setSearchText } = useContext(dataContext);
 
   const Enter = (event: any) => {
     if (event.key === 'Enter') {
@@ -23,7 +21,7 @@ export default function Search(props: SerachBarProps): JSX.Element {
 
   const clickSearch = () => {
     history.push("/items/" + encodeUrl(text));
-    setSearchText(text);
+    //setSearchText(text);
   }
   return (
     <div className="container-fluid">
