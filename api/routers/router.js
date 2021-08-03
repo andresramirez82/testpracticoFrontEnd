@@ -86,8 +86,8 @@ router.get('/api/items', middlewareAgent, function (req, res) {
                 Items.push(response.data.results[Prod]);
                 const IdCategory = response.data.results[Prod]['category_id'];
                 category = await axios.get(` https://api.mercadolibre.com/categories/${IdCategory}`, config);
-                //console.log(category.data.path_from_root);
-                
+                //console.log(IdCategory);
+
 
                 //console.log(response.data.results[Prod]);
                 //ReturnArray.push(Author);
@@ -109,9 +109,33 @@ router.get('/api/items', middlewareAgent, function (req, res) {
 });
 
 router.get('/api/items/:id', middlewareAgent, function (req, res) {
-    let q = req.query.q;
-    // https://api.mercadolibre.com/items/:id
-    // https://api.mercadolibre.com/items/:id/description
+    let id = req.params.id;
+    var token = req.headers.authorization.split(" ")[1];
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    };
+    res.setHeader('Content-Type', 'application/json');
+    //res.send(config);
+    axios.get(`https://api.mercadolibre.com/items/${id}`, config)
+        .then(async function (response) {
+
+            const category = await axios.get(` https://api.mercadolibre.com/categories/${response.data.category_id}`, config);
+            const detail = await axios.get(` https://api.mercadolibre.com/items/${id}/description`, config);
+
+            response.data.condition == 'used' ? response.data.condition = 'Usado' : response.data.condition = 'Nuevo';
+            const Data = {
+                title: response.data.title,
+                category: category.data.path_from_root,
+                price: response.data.price,
+                detail: detail.data.plain_text,
+                thumbnail: response.data.pictures[0].url,
+                condition: response.data.condition,
+                sold_quantity: response.data.sold_quantity
+            }
+            res.send(Data);
+        });
 });
 
 module.exports = router;

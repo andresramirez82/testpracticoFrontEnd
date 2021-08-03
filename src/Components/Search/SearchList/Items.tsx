@@ -1,3 +1,5 @@
+import NumberFormat from "react-number-format";
+
 export default function Items(props: any): JSX.Element {
   return (
     <>
@@ -14,7 +16,12 @@ export default function Items(props: any): JSX.Element {
         <div className="col-6">
           <div className="row">
             <div className="col-6 price">
-              $ {props.price}
+              <NumberFormat
+                value={props.price}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
               {props.shipping.free_shipping && (
                 <img
                   className="shipping"
@@ -27,8 +34,10 @@ export default function Items(props: any): JSX.Element {
           </div>
           <div className="row">
             <div className="col-6 title">
-              <a href={'/items/id/' + props.id} >{props.title}</a>
-              </div>
+              <a href={"/items/id/" + props.id} className="link">
+                {props.title}
+              </a>
+            </div>
           </div>
         </div>
         <div className="col-2 city">

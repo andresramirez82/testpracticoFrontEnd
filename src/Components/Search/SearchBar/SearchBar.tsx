@@ -4,12 +4,11 @@ import FormControl from "react-bootstrap/FormControl";
 import "Styles/App.scss";
 import { useHistory } from "react-router-dom";
 import { dataContext } from "Helper/Store";
+import { SerachBarProps } from "Models/Models";
 var encodeUrl = require('encodeurl');
 
 
-type SerachBarProps = {
-  text?: string;
-};
+
 
 export default function Search(props: SerachBarProps): JSX.Element {
   const [text, settext] = useState(props.text);

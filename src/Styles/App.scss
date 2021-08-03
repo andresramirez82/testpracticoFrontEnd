@@ -61,6 +61,7 @@ html, body{
     padding-top: 32px;
     font-weight: bold;
     font-size: 24px;
+    color: $negro;
 }
 
 .title {
@@ -80,8 +81,53 @@ html, body{
   .city {
     padding-top: 44px;
     font-size: 12px;
+    color: $negro;
   }
 
   .shipping {
       padding-left: 16px;
   }
+
+  .link {
+    text-decoration: none;
+    color: $negro;
+  }
+
+  .sold_quantity {
+    font-size: 14;
+    padding-bottom: 14px;
+    padding-left: 14px;
+  }
+
+  .titledetail {
+    //padding-top: 32px;
+    font-weight: bold;
+    font-size: 24px; 
+ }
+
+ .pricedetail {
+    font-weight: bold;
+    font-size: 46px; 
+ }
+
+ .descriptiontitle {
+    font-weight: bold;
+    font-size: 28px;
+    padding-bottom: 32px;
+    padding-left: 32px;
+ }
+
+ .description {
+    font-size: 16;
+    padding-bottom: 32px;
+    padding-left: 32px;
+    text-align: justify;
+    text-justify: inter-word;
+ }
+
+.button {
+    background-color: $button;
+    padding-left: 32px;
+    padding-right: 32px;
+    color: white;
+}
